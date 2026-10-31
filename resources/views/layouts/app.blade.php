@@ -305,11 +305,11 @@
                                     </a>
 
                                     <div class="border-t border-gray-100 dark:border-slate-700 my-1"></div>
-                                    <form method="POST" action="{{ route('logout') }}" class="block">
+                                    <form id="logout-form" method="POST" action="{{ route('logout') }}" class="block">
                                         @csrf
-                                        <button type="submit" class="w-full flex items-center gap-2.5 px-4 py-2 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/20 font-semibold text-left">
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="w-full flex items-center gap-2.5 px-4 py-2 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/20 font-semibold text-left cursor-pointer">
                                             <i class="fas fa-right-from-bracket w-4"></i> Keluar (Logout)
-                                        </button>
+                                        </a>
                                     </form>
                                 </div>
                             </div>

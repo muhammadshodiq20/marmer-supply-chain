@@ -106,9 +106,9 @@
                         </a>
                         <form action="{{ route('logout') }}" method="POST" class="inline">
                             @csrf
-                            <button type="submit" class="p-2 rounded-xl text-slate-400 hover:text-rose-400 text-xs border border-slate-800" title="Keluar">
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="p-2 rounded-xl text-slate-400 hover:text-rose-400 text-xs border border-slate-800 cursor-pointer inline-flex items-center" title="Keluar">
                                 <i class="fas fa-power-off"></i>
-                            </button>
+                            </a>
                         </form>
                     </div>
                 @endguest

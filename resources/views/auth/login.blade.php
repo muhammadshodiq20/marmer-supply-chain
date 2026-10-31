@@ -77,15 +77,15 @@
             <div class="border-t border-slate-800 w-full"></div>
         </div>
 
-        <!-- Form Email & Password -->
+        <!-- Form Email / Username & Password -->
         <form action="{{ route('login.post') }}" method="POST" class="space-y-4">
             @csrf
 
             <div>
-                <label class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1.5">Alamat Email</label>
+                <label class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1.5">Email / Username Akun</label>
                 <div class="relative">
-                    <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
-                    <input type="email" name="email" value="{{ old('email') }}" placeholder="nama@email.com" required class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                    <input type="text" name="email" value="{{ old('email') }}" placeholder="admin / operator / buyer / email..." required autocapitalize="none" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500">
                 </div>
             </div>
 
@@ -93,7 +93,7 @@
                 <label class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1.5">Kata Sandi</label>
                 <div class="relative">
                     <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
-                    <input type="password" name="password" placeholder="••••••••" required class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <input type="password" name="password" placeholder="admin / operator / buyer" required class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500">
                 </div>
             </div>
 
@@ -110,24 +110,53 @@
             </button>
         </form>
 
-        <!-- Quick 1-Click Role Login (Bagus untuk Uji Coba & Presentasi Magang) -->
+        <!-- Kredensial Akun Pengguna Resmi -->
         <div class="mt-6 pt-5 border-t border-slate-800">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-2 text-center">
-                Demo Login Instan (1-Klik):
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-2.5 text-center">
+                <i class="fas fa-shield-halved text-teal-400 mr-1"></i> Akun Resmi Tersedia:
             </span>
-            <div class="grid grid-cols-3 gap-2">
-                <a href="{{ route('auth.quick', 'admin') }}" class="p-2 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 text-teal-400 text-center transition-all">
-                    <i class="fas fa-crown text-xs block mb-1"></i>
-                    <span class="text-[10px] font-bold block">Admin</span>
-                </a>
-                <a href="{{ route('auth.quick', 'operator') }}" class="p-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-400 text-center transition-all">
-                    <i class="fas fa-hammer text-xs block mb-1"></i>
-                    <span class="text-[10px] font-bold block">Operator</span>
-                </a>
-                <a href="{{ route('auth.quick', 'buyer') }}" class="p-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 text-center transition-all">
-                    <i class="fas fa-bag-shopping text-xs block mb-1"></i>
-                    <span class="text-[10px] font-bold block">Buyer</span>
-                </a>
+            <div class="space-y-2 text-[11px]">
+                <!-- Akun Admin -->
+                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
+                    <div>
+                        <span class="font-bold text-teal-400 flex items-center gap-1.5">
+                            <i class="fas fa-crown text-[10px]"></i> Admin (Owner):
+                        </span>
+                        <span class="text-slate-300 font-mono text-[10px]">admin@marmer.com <span class="text-slate-500 font-sans">(atau: <strong class="text-teal-300">admin</strong>)</span></span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[9px] text-slate-500 block uppercase font-bold">Password:</span>
+                        <span class="font-mono text-emerald-400 font-bold text-xs bg-slate-900 px-2 py-0.5 rounded border border-slate-700">admin</span>
+                    </div>
+                </div>
+
+                <!-- Akun Operator -->
+                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
+                    <div>
+                        <span class="font-bold text-amber-400 flex items-center gap-1.5">
+                            <i class="fas fa-hammer text-[10px]"></i> Operator Bengkel:
+                        </span>
+                        <span class="text-slate-300 font-mono text-[10px]">operator@marmer.com <span class="text-slate-500 font-sans">(atau: <strong class="text-amber-300">operator</strong>)</span></span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[9px] text-slate-500 block uppercase font-bold">Password:</span>
+                        <span class="font-mono text-emerald-400 font-bold text-xs bg-slate-900 px-2 py-0.5 rounded border border-slate-700">operator</span>
+                    </div>
+                </div>
+
+                <!-- Akun Buyer -->
+                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
+                    <div>
+                        <span class="font-bold text-cyan-400 flex items-center gap-1.5">
+                            <i class="fas fa-bag-shopping text-[10px]"></i> Buyer / Pelanggan:
+                        </span>
+                        <span class="text-slate-300 font-mono text-[10px]">buyer@marmer.com <span class="text-slate-500 font-sans">(atau: <strong class="text-cyan-300">buyer</strong>)</span></span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[9px] text-slate-500 block uppercase font-bold">Password:</span>
+                        <span class="font-mono text-emerald-400 font-bold text-xs bg-slate-900 px-2 py-0.5 rounded border border-slate-700">buyer</span>
+                    </div>
+                </div>
             </div>
         </div>
 

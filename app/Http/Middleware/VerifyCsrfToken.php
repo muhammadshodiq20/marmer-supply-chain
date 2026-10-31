@@ -14,5 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'auth/google/select',
         'auth/google/callback',
+        'logout',
     ];
 }

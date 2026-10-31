@@ -13,33 +13,79 @@ use App\Models\ProcessFlow;
 use App\Models\WasteRecord;
 use App\Models\WasteUtilization;
 use App\Models\SystemNeed;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Profil IKM
-        $cahayaOnix = IkmProfile::create([
-            'nama_pemilik' => 'M. Ilham Nur Amali',
-            'nama_usaha' => 'UD Cahaya Onix',
-            'fokus_produksi' => 'Pengolahan Batu Marmer & Onix',
-            'lokasi' => 'Desa Gamping, Kec. Campurdarat, Kab. Tulungagung',
-            'kekuatan_produksi' => '1 hari -> 14 Biji -> 7 mesin bubut',
-            'deskripsi' => 'Sentra pengolahan batu marmer Tulungagung unggulan yang mengolah marmer Besole putih, marmer hitam, merah, TR, dan cappuccino menjadi produk interior bernilai seni tinggi.',
-            'telepon' => '0812-3456-7890',
-            'email' => 'cahayaonix.tulungagung@gmail.com',
-        ]);
+        // 0. Akun Pengguna Resmi (Admin, Operator, Buyer)
+        User::updateOrCreate(
+            ['email' => 'admin@marmer.com'],
+            [
+                'name' => 'Administrator IKM Marmer',
+                'role' => 'admin',
+                'telepon' => '081234567890',
+                'alamat' => 'Sentra IKM Campurdarat Tulungagung',
+                'password' => Hash::make('admin'),
+                'is_active' => true,
+                'avatar' => 'https://ui-avatars.com/api/?name=Admin+Marmer&background=0d9488&color=fff',
+            ]
+        );
 
-        $putraAbadi = IkmProfile::create([
-            'nama_pemilik' => 'Efri Saputra',
-            'nama_usaha' => 'UD. Putra Abadi',
-            'fokus_produksi' => 'Pengolahan Batu Kali & Andesit Alam',
-            'lokasi' => 'Desa Gamping, Kec. Campurdarat, Kab. Tulungagung',
-            'kekuatan_produksi' => 'Spesialis stepping stone taman, wastafel batu kali natural, dan kap lampu artistik',
-            'deskripsi' => 'Pengrajin batu alam sungai alami pilihan yang mempertahankan tekstur eksotis alami dengan kombinasi finishing poles halus pada bagian fungsional.',
-            'telepon' => '0821-9876-5432',
-            'email' => 'putraabadi.naturalstone@gmail.com',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'operator@marmer.com'],
+            [
+                'name' => 'Operator Bengkel Bubut',
+                'role' => 'operator',
+                'telepon' => '081234567891',
+                'alamat' => 'Workshop UD Cahaya Onix Gamping',
+                'password' => Hash::make('operator'),
+                'is_active' => true,
+                'avatar' => 'https://ui-avatars.com/api/?name=Operator+Bengkel&background=d97706&color=fff',
+            ]
+        );
+
+        User::updateOrCreate(
+            ['email' => 'buyer@marmer.com'],
+            [
+                'name' => 'Pelanggan / Buyer Setia',
+                'role' => 'buyer',
+                'telepon' => '081234567892',
+                'alamat' => 'Jl. Danau Tamblingan No. 88, Sanur, Denpasar',
+                'password' => Hash::make('buyer'),
+                'is_active' => true,
+                'avatar' => 'https://ui-avatars.com/api/?name=Buyer+Marmer&background=0284c7&color=fff',
+            ]
+        );
+
+        // 1. Profil IKM
+        $cahayaOnix = IkmProfile::updateOrCreate(
+            ['nama_usaha' => 'UD Cahaya Onix'],
+            [
+                'nama_pemilik' => 'M. Ilham Nur Amali',
+                'fokus_produksi' => 'Pengolahan Batu Marmer & Onix',
+                'lokasi' => 'Desa Gamping, Kec. Campurdarat, Kab. Tulungagung',
+                'kekuatan_produksi' => '1 hari -> 14 Biji -> 7 mesin bubut',
+                'deskripsi' => 'Sentra pengolahan batu marmer Tulungagung unggulan yang mengolah marmer Besole putih, marmer hitam, merah, TR, dan cappuccino menjadi produk interior bernilai seni tinggi.',
+                'telepon' => '0812-3456-7890',
+                'email' => 'cahayaonix.tulungagung@gmail.com',
+            ]
+        );
+
+        $putraAbadi = IkmProfile::updateOrCreate(
+            ['nama_usaha' => 'UD. Putra Abadi'],
+            [
+                'nama_pemilik' => 'Efri Saputra',
+                'fokus_produksi' => 'Pengolahan Batu Kali & Andesit Alam',
+                'lokasi' => 'Desa Gamping, Kec. Campurdarat, Kab. Tulungagung',
+                'kekuatan_produksi' => 'Spesialis stepping stone taman, wastafel batu kali natural, dan kap lampu artistik',
+                'deskripsi' => 'Pengrajin batu alam sungai alami pilihan yang mempertahankan tekstur eksotis alami dengan kombinasi finishing poles halus pada bagian fungsional.',
+                'telepon' => '0821-9876-5432',
+                'email' => 'putraabadi.naturalstone@gmail.com',
+            ]
+        );
 
         // 2. Produk
         $p1 = Product::updateOrCreate(
