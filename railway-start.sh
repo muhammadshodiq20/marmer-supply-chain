@@ -14,8 +14,7 @@ fi
 
 # Pastikan APP_KEY & Konfigurasi URL HTTPS tersedia
 if [ -z "$APP_KEY" ]; then
-    echo "===> Generate temporary APP_KEY..."
-    export APP_KEY="base64:XG8o396F/eH1q8v/t+W1lX8Q0zP5J2sL1t3g4i6u7e8="
+    export APP_KEY="base64:Ph42VuoWS99JmOiAapxH5CUElqOd6udGA09c/0DFuR0="
 fi
 
 export APP_ENV="production"
@@ -25,6 +24,10 @@ elif [ -z "$APP_URL" ]; then
     export APP_URL="https://marmer-supply-chain-production.up.railway.app"
 fi
 export ASSET_URL="$APP_URL"
+
+echo "===> Menyiapkan folder sesi, cache, dan hak akses write..."
+mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache storage/logs bootstrap/cache
+chmod -R 777 storage bootstrap/cache || true
 
 echo "===> Membersihkan cache config & view..."
 php artisan config:clear || true
