@@ -12,11 +12,19 @@ if [ -n "$MYSQLHOST" ]; then
     echo "===> Terdeteksi host MySQL Railway: $MYSQLHOST (Port: ${MYSQLPORT:-3306})"
 fi
 
-# Pastikan APP_KEY tersedia
+# Pastikan APP_KEY & Konfigurasi URL HTTPS tersedia
 if [ -z "$APP_KEY" ]; then
     echo "===> Generate temporary APP_KEY..."
     export APP_KEY="base64:XG8o396F/eH1q8v/t+W1lX8Q0zP5J2sL1t3g4i6u7e8="
 fi
+
+export APP_ENV="production"
+if [ -n "$RAILWAY_PUBLIC_DOMAIN" ]; then
+    export APP_URL="https://$RAILWAY_PUBLIC_DOMAIN"
+elif [ -z "$APP_URL" ]; then
+    export APP_URL="https://marmer-supply-chain-production.up.railway.app"
+fi
+export ASSET_URL="$APP_URL"
 
 echo "===> Membersihkan cache config & view..."
 php artisan config:clear || true
