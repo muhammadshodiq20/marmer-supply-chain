@@ -71,21 +71,11 @@
             <div class="glass rounded-3xl border border-gray-200/70 dark:border-slate-800 overflow-hidden shadow-sm card-hover flex flex-col group relative">
                 <!-- Image Container -->
                 <div class="h-56 w-full bg-slate-900 relative overflow-hidden flex items-center justify-center">
-                    @if($product->gambar_path)
-                        @php
-                            $imgSrc = str_starts_with($product->gambar_path, 'http') ? $product->gambar_path : asset('storage/' . $product->gambar_path);
-                        @endphp
-                        <img src="{{ $imgSrc }}" alt="{{ $product->nama_produk }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    @else
-                        <!-- Graphic Aesthetic Fallback Placeholder -->
-                        <div class="text-center p-6 bg-gradient-to-br from-slate-900 via-slate-800 to-teal-950 w-full h-full flex flex-col items-center justify-center">
-                            <div class="w-16 h-16 rounded-2xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 text-2xl mb-2">
-                                <i class="fas fa-gem"></i>
-                            </div>
-                            <span class="text-xs font-bold text-white tracking-wide">{{ $product->nama_produk }}</span>
-                            <span class="text-[10px] text-teal-400/80 font-mono mt-0.5">{{ $product->jenis_batu }}</span>
-                        </div>
-                    @endif
+                    <img src="{{ $product->image_url }}" 
+                         alt="{{ $product->nama_produk }}" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                         loading="lazy"
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80';">
 
                     <!-- Sentra IKM Badge -->
                     <div class="absolute top-3 left-3 z-10">

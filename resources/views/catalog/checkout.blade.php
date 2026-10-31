@@ -48,16 +48,7 @@
 
                 <div class="flex flex-col sm:flex-row items-center gap-4 pb-6 border-b border-gray-100 dark:border-slate-800">
                     <div class="w-24 h-24 rounded-2xl overflow-hidden bg-slate-900 shrink-0">
-                        @if($product->gambar_path)
-                            @php
-                                $img = str_starts_with($product->gambar_path, 'http') ? $product->gambar_path : asset('storage/' . $product->gambar_path);
-                            @endphp
-                            <img src="{{ $img }}" alt="{{ $product->nama_produk }}" class="w-full h-full object-cover">
-                        @else
-                            <div class="w-full h-full flex items-center justify-center text-gray-500">
-                                <i class="fas fa-gem text-2xl text-teal-400"></i>
-                            </div>
-                        @endif
+                        <img src="{{ $product->image_url }}" alt="{{ $product->nama_produk }}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80';">
                     </div>
 
                     <div class="flex-1 text-center sm:text-left">

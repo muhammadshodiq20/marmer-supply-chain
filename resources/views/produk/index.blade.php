@@ -44,17 +44,7 @@
                 <div>
                     <!-- Thumbnail Container -->
                     <div class="h-44 w-full bg-slate-900 relative overflow-hidden flex items-center justify-center">
-                        @if($product->gambar_path)
-                            @php
-                                $imgSrc = str_starts_with($product->gambar_path, 'http') ? $product->gambar_path : asset('storage/' . $product->gambar_path);
-                            @endphp
-                            <img src="{{ $imgSrc }}" alt="{{ $product->nama_produk }}" class="w-full h-full object-cover">
-                        @else
-                            <div class="text-center p-4">
-                                <i class="fas fa-image text-3xl text-gray-600 mb-2"></i>
-                                <p class="text-[11px] text-gray-400">Belum ada foto produk</p>
-                            </div>
-                        @endif
+                        <img src="{{ $product->image_url }}" alt="{{ $product->nama_produk }}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80';">
 
                         <div class="absolute top-3 left-3">
                             <span class="text-xs px-2.5 py-1 rounded-md bg-slate-950/80 text-teal-400 font-semibold backdrop-blur-md border border-slate-700">

@@ -42,59 +42,85 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // 2. Produk
-        $p1 = Product::create([
-            'ikm_profile_id' => $cahayaOnix->id,
-            'nama_produk' => 'Wastafel (Sink Marmer/Marble)',
-            'jenis_batu' => 'Marmer Besole Putih / Hitam',
-            'deskripsi' => 'Wastafel mewah corak serat alami marmer pegunungan Tulungagung dengan ketahanan tinggi dan kilau Hi-Glossy.',
-            'harga' => 450000,
-            'is_active' => true,
-        ]);
+        $p1 = Product::updateOrCreate(
+            ['nama_produk' => 'Wastafel (Sink Marmer/Marble)'],
+            [
+                'ikm_profile_id' => $cahayaOnix->id,
+                'jenis_batu' => 'Marmer Besole Putih / Hitam',
+                'deskripsi' => 'Wastafel mewah corak serat alami marmer pegunungan Tulungagung dengan ketahanan tinggi dan kilau Hi-Glossy.',
+                'harga' => 450000,
+                'gambar_path' => 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
+                'is_active' => true,
+            ]
+        );
 
-        $p2 = Product::create([
-            'ikm_profile_id' => $cahayaOnix->id,
-            'nama_produk' => 'Pedestal Marmer',
-            'jenis_batu' => 'Marmer Tulungagung',
-            'deskripsi' => 'Wastafel berdiri (pedestal) elegan dengan konstruksi kokoh dan polesan detail tanpa pori.',
-            'harga' => 1250000,
-            'is_active' => true,
-        ]);
+        $p2 = Product::updateOrCreate(
+            ['nama_produk' => 'Pedestal Marmer'],
+            [
+                'ikm_profile_id' => $cahayaOnix->id,
+                'jenis_batu' => 'Marmer Tulungagung',
+                'deskripsi' => 'Wastafel berdiri (pedestal) elegan dengan konstruksi kokoh dan polesan detail tanpa pori.',
+                'harga' => 1250000,
+                'gambar_path' => 'https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=800&q=80',
+                'is_active' => true,
+            ]
+        );
 
-        $p3 = Product::create([
-            'ikm_profile_id' => $cahayaOnix->id,
-            'nama_produk' => 'Dispenser Sabun Marmer',
-            'jenis_batu' => 'Marmer Alami & Onix',
-            'deskripsi' => 'Aksesoris kamar mandi mewah dari marmer padat dan pompa tahan karat.',
-            'harga' => 85000,
-            'is_active' => true,
-        ]);
+        $p3 = Product::updateOrCreate(
+            ['nama_produk' => 'Dispenser Sabun Marmer'],
+            [
+                'ikm_profile_id' => $cahayaOnix->id,
+                'jenis_batu' => 'Marmer Alami & Onix',
+                'deskripsi' => 'Aksesoris kamar mandi mewah dari marmer padat dan pompa tahan karat.',
+                'harga' => 85000,
+                'gambar_path' => 'https://images.unsplash.com/photo-1608248597359-009772a0833d?auto=format&fit=crop&w=800&q=80',
+                'is_active' => true,
+            ]
+        );
 
-        $p4 = Product::create([
-            'ikm_profile_id' => $putraAbadi->id,
-            'nama_produk' => 'Stepping Batu Kali',
-            'jenis_batu' => 'Batu Kali Sungai Alami',
-            'deskripsi' => 'Batu pijakan taman (stepping stone) dengan permukaan potong rata 3 cm dan pinggiran bulat aman.',
-            'harga' => 35000,
-            'is_active' => true,
-        ]);
+        $p4 = Product::updateOrCreate(
+            ['nama_produk' => 'Stepping Batu Kali'],
+            [
+                'ikm_profile_id' => $putraAbadi->id,
+                'jenis_batu' => 'Batu Kali Sungai Alami',
+                'deskripsi' => 'Batu pijakan taman (stepping stone) dengan permukaan potong rata 3 cm dan pinggiran bulat aman.',
+                'harga' => 35000,
+                'gambar_path' => 'https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=800&q=80',
+                'is_active' => true,
+            ]
+        );
 
-        $p5 = Product::create([
-            'ikm_profile_id' => $putraAbadi->id,
-            'nama_produk' => 'Wastafel Batu Kali',
-            'jenis_batu' => 'Batu Kali Boulder',
-            'deskripsi' => 'Wastafel estetik nuansa zen / resort dengan bagian luar kulit batu asli dan bagian dalam terpoles kilap.',
-            'harga' => 350000,
-            'is_active' => true,
-        ]);
+        $p5 = Product::updateOrCreate(
+            ['nama_produk' => 'Wastafel Batu Kali'],
+            [
+                'ikm_profile_id' => $putraAbadi->id,
+                'jenis_batu' => 'Batu Kali Boulder',
+                'deskripsi' => 'Wastafel estetik nuansa zen / resort dengan bagian luar kulit batu asli dan bagian dalam terpoles kilap.',
+                'harga' => 350000,
+                'gambar_path' => 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=800&q=80',
+                'is_active' => true,
+            ]
+        );
 
-        $p6 = Product::create([
-            'ikm_profile_id' => $putraAbadi->id,
-            'nama_produk' => 'Kap Lampu Batu Kali',
-            'jenis_batu' => 'Batu Kali Alami',
-            'deskripsi' => 'Kap lampu taman tahan cuaca ekstrem yang memancarkan pendar cahaya hangat di malam hari.',
-            'harga' => 175000,
-            'is_active' => true,
-        ]);
+        $p6 = Product::updateOrCreate(
+            ['nama_produk' => 'Kap Lampu Batu Kali'],
+            [
+                'ikm_profile_id' => $putraAbadi->id,
+                'jenis_batu' => 'Batu Kali Alami',
+                'deskripsi' => 'Kap lampu taman tahan cuaca ekstrem yang memancarkan pendar cahaya hangat di malam hari.',
+                'harga' => 175000,
+                'gambar_path' => 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=800&q=80',
+                'is_active' => true,
+            ]
+        );
+
+        // Pastikan seluruh produk yang sudah ada di database mendapatkan foto marmer otentik
+        foreach (Product::all() as $prod) {
+            if (empty($prod->gambar_path) || !str_starts_with($prod->gambar_path, 'http')) {
+                $prod->gambar_path = $prod->image_url;
+                $prod->save();
+            }
+        }
 
         // 3. Bahan Baku UD Cahaya Onix (2026)
         $cahayaMaterials = [
