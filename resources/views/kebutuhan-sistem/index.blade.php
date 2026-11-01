@@ -7,45 +7,6 @@
 @section('content')
 <div class="space-y-6">
 
-    <!-- Penjelasan Edukatif & Arsitektur Sistem -->
-    <div class="glass p-8 rounded-3xl border border-gray-200/70 dark:border-slate-800 shadow-sm relative overflow-hidden">
-        <div class="max-w-3xl">
-            <span class="text-xs font-bold text-teal-600 dark:text-teal-400 uppercase tracking-wider bg-teal-50 dark:bg-teal-900/30 px-3 py-1 rounded-full border border-teal-500/20">
-                Dokumentasi & Arsitektur Perangkat Lunak
-            </span>
-            <h2 class="text-2xl font-black text-gray-900 dark:text-white mt-3">
-                Apa Fungsi Bagian "System Requirements" Ini?
-            </h2>
-            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed mt-2">
-                Dalam rekayasa perangkat lunak (*Software Engineering*) dan riset magang, <strong>System Requirements</strong> adalah jembatan antara <strong>masalah nyata yang dialami pengrajin marmer Campurdarat</strong> dengan <strong>fitur aplikasi web yang dibangun</strong>.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 pt-6 border-t border-gray-100 dark:border-slate-800 text-xs">
-            <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-800/40 border border-gray-100 dark:border-slate-800">
-                <span class="font-bold text-teal-600 dark:text-teal-400 block mb-1">🎯 Untuk Siapa Bagian Ini?</span>
-                <p class="text-gray-600 dark:text-gray-300">
-                    Untuk <strong>Dosen Penguji, Pembimbing Magang, dan Developer</strong> untuk membuktikan bahwa setiap fitur dibuat bukan asal-asalan, melainkan berangkat dari temuan wawancara riil di UD Cahaya Onix & UD Putra Abadi.
-                </p>
-            </div>
-
-            <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-800/40 border border-gray-100 dark:border-slate-800">
-                <span class="font-bold text-teal-600 dark:text-teal-400 block mb-1">💻 Kebutuhan Perangkat</span>
-                <p class="text-gray-600 dark:text-gray-300">
-                    <strong>Hardware:</strong> HP/Tablet dengan Wi-Fi di bengkel untuk operator, PC/Laptop untuk Admin.<br>
-                    <strong>Software:</strong> Web browser modern, PHP 8.1+, MySQL 8.0, dan server Laragon.
-                </p>
-            </div>
-
-            <div class="p-4 rounded-2xl bg-gray-50/70 dark:bg-slate-800/40 border border-gray-100 dark:border-slate-800">
-                <span class="font-bold text-teal-600 dark:text-teal-400 block mb-1">⚙️ Implementasi Nyata</span>
-                <p class="text-gray-600 dark:text-gray-300">
-                    Pencatatan manual di buku digantikan oleh modul <strong>Bahan Baku</strong>, pengiriman foto via WA digantikan oleh <strong>Katalog SEO</strong>, dan limbah brongkolan dimonetisasi di <strong>Circular Economy</strong>.
-                </p>
-            </div>
-        </div>
-    </div>
-
     <!-- 20 Temuan Wawancara & Solusi Sistem -->
     <div class="glass rounded-3xl border border-gray-200/70 dark:border-slate-800 shadow-sm overflow-hidden">
         <div class="p-6 border-b border-gray-100 dark:border-slate-800 flex items-center justify-between">
