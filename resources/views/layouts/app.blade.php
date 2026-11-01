@@ -1,8 +1,16 @@
 <!DOCTYPE html>
-<html lang="id" x-data="{ sidebarOpen: true, darkMode: localStorage.getItem('darkMode') === 'true' }" :class="{ 'dark': darkMode }">
+<html lang="id" x-data="{ 
+    sidebarOpen: window.innerWidth >= 1024, 
+    isMobile: window.innerWidth < 1024, 
+    darkMode: localStorage.getItem('darkMode') === 'true' 
+}" 
+@resize.window="isMobile = window.innerWidth < 1024; if(isMobile && sidebarOpen) sidebarOpen = false;"
+:class="{ 'dark': darkMode }">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'E-Supply Chain') - IKM Marmer Tulungagung</title>
     
@@ -80,12 +88,25 @@
     </style>
     @stack('styles')
 </head>
-<body class="bg-gray-50 dark:bg-slate-900 min-h-screen text-gray-800 dark:text-gray-100">
-    <div class="flex min-h-screen">
+<body class="bg-gray-50 dark:bg-slate-900 min-h-screen text-gray-800 dark:text-gray-100 selection:bg-teal-500 selection:text-white">
+    <div class="flex min-h-screen relative overflow-x-hidden">
+
+        <!-- Mobile Overlay Backdrop -->
+        <div x-show="sidebarOpen && isMobile" 
+             x-transition.opacity
+             @click="sidebarOpen = false" 
+             class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-40 lg:hidden"
+             style="display: none;">
+        </div>
+
         <!-- Sidebar -->
         <aside 
-            class="sidebar-transition fixed inset-y-0 left-0 z-50 glass dark:glass shadow-xl"
-            :class="sidebarOpen ? 'w-72' : 'w-20'"
+            class="sidebar-transition fixed inset-y-0 left-0 z-50 glass dark:glass shadow-2xl overflow-y-auto"
+            :class="{
+                'translate-x-0 w-72': sidebarOpen,
+                '-translate-x-full lg:translate-x-0 lg:w-20': !sidebarOpen && isMobile,
+                'w-20 translate-x-0': !sidebarOpen && !isMobile
+            }"
         >
             <div class="flex flex-col h-full">
                 <!-- Logo -->
@@ -175,17 +196,18 @@
         </aside>
         
         <!-- Main Content -->
-        <main class="flex-1 sidebar-transition" :class="sidebarOpen ? 'ml-72' : 'ml-20'">
+        <main class="flex-1 sidebar-transition min-h-screen flex flex-col w-full overflow-x-hidden" 
+              :class="isMobile ? 'ml-0' : (sidebarOpen ? 'ml-72' : 'ml-20')">
             <!-- Top Bar -->
             <header class="sticky top-0 z-40 glass dark:glass border-b border-gray-200/50 dark:border-slate-700/50">
-                <div class="flex items-center justify-between px-6 py-3">
-                    <div class="flex items-center gap-4">
-                        <button @click="sidebarOpen = !sidebarOpen" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800">
-                            <i class="fas fa-bars text-gray-600 dark:text-gray-300"></i>
+                <div class="flex items-center justify-between px-4 sm:px-6 py-3">
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <button @click="sidebarOpen = !sidebarOpen" class="p-2 rounded-xl bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:text-teal-500 transition-colors">
+                            <i class="fas fa-bars text-sm"></i>
                         </button>
                         <div>
-                            <h2 class="text-lg font-semibold text-gray-800 dark:text-white">@yield('page-title', 'Dashboard')</h2>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">@yield('page-subtitle', 'E-Supply Chain IKM Marmer Tulungagung')</p>
+                            <h2 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-white truncate max-w-[200px] sm:max-w-md">@yield('page-title', 'Dashboard')</h2>
+                            <p class="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 hidden xs:block">@yield('page-subtitle', 'E-Supply Chain IKM Marmer Tulungagung')</p>
                         </div>
                     </div>
 

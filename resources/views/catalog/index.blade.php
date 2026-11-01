@@ -37,27 +37,29 @@
         <div class="absolute -right-10 -bottom-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
     </div>
 
-    <!-- Filter & Action Bar -->
-    <div class="glass p-5 rounded-3xl border border-gray-200/70 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
-        <form method="GET" action="{{ route('catalog') }}" class="flex flex-wrap items-center gap-3">
-            <select name="ikm" class="px-4 py-2 rounded-xl text-xs bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-700 dark:text-gray-200">
+    <!-- Filter & Action Bar (Fully Responsive) -->
+    <div class="glass p-4 sm:p-5 rounded-3xl border border-gray-200/70 dark:border-slate-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+        <form method="GET" action="{{ route('catalog') }}" class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 flex-1">
+            <select name="ikm" class="w-full sm:w-auto px-4 py-2 rounded-xl text-xs bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500">
                 <option value="">Semua Sentra IKM</option>
                 @foreach($ikmProfiles as $ikm)
                     <option value="{{ $ikm->id }}" {{ request('ikm') == $ikm->id ? 'selected' : '' }}>{{ $ikm->nama_usaha }}</option>
                 @endforeach
             </select>
 
-            <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari wastafel, stepping..." class="px-4 py-2 rounded-xl text-xs bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-800 dark:text-gray-200">
+            <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari wastafel, stepping..." class="w-full sm:w-auto flex-1 px-4 py-2 rounded-xl text-xs bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500">
 
-            <button type="submit" class="px-4 py-2 rounded-xl bg-teal-500 hover:bg-teal-600 text-white text-xs font-semibold shadow-sm transition-all">
-                <i class="fas fa-filter mr-1"></i> Filter
-            </button>
-            @if(request()->anyFilled(['ikm', 'search']))
-                <a href="{{ route('catalog') }}" class="text-xs text-gray-400 hover:text-gray-600">Reset</a>
-            @endif
+            <div class="flex items-center gap-2">
+                <button type="submit" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-teal-500 hover:bg-teal-600 text-white text-xs font-semibold shadow-sm transition-all text-center">
+                    <i class="fas fa-filter mr-1"></i> Filter
+                </button>
+                @if(request()->anyFilled(['ikm', 'search']))
+                    <a href="{{ route('catalog') }}" class="px-3 py-2 text-xs text-gray-400 hover:text-gray-600">Reset</a>
+                @endif
+            </div>
         </form>
 
-        <div class="flex items-center gap-3">
+        <div class="flex items-center justify-between sm:justify-end gap-3 pt-3 sm:pt-0 border-t sm:border-t-0 border-gray-100 dark:border-slate-800">
             <span class="text-xs text-gray-500 font-semibold">{{ $products->total() }} Produk Tersedia</span>
             <a href="{{ route('produk.create', ['source' => 'catalog']) }}" class="px-3 py-1.5 rounded-xl bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 text-xs font-bold border border-teal-500/20 hover:bg-teal-600 hover:text-white transition-all flex items-center gap-1">
                 <i class="fas fa-plus"></i> Tambah Baru

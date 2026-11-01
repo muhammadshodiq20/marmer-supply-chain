@@ -87,7 +87,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // 2. Produk
+        // 2. Produk (Menggunakan Foto Asli yang Diunggah Pengguna)
         $p1 = Product::updateOrCreate(
             ['nama_produk' => 'Wastafel (Sink Marmer/Marble)'],
             [
@@ -95,7 +95,7 @@ class DatabaseSeeder extends Seeder
                 'jenis_batu' => 'Marmer Besole Putih / Hitam',
                 'deskripsi' => 'Wastafel mewah corak serat alami marmer pegunungan Tulungagung dengan ketahanan tinggi dan kilau Hi-Glossy.',
                 'harga' => 450000,
-                'gambar_path' => 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
+                'gambar_path' => 'products/1793247630_6ae2c98e22856.jpg',
                 'is_active' => true,
             ]
         );
@@ -107,7 +107,7 @@ class DatabaseSeeder extends Seeder
                 'jenis_batu' => 'Marmer Tulungagung',
                 'deskripsi' => 'Wastafel berdiri (pedestal) elegan dengan konstruksi kokoh dan polesan detail tanpa pori.',
                 'harga' => 1250000,
-                'gambar_path' => 'https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=800&q=80',
+                'gambar_path' => 'products/1793247838_6ae2ca5e48140.jpg',
                 'is_active' => true,
             ]
         );
@@ -119,7 +119,7 @@ class DatabaseSeeder extends Seeder
                 'jenis_batu' => 'Marmer Alami & Onix',
                 'deskripsi' => 'Aksesoris kamar mandi mewah dari marmer padat dan pompa tahan karat.',
                 'harga' => 85000,
-                'gambar_path' => 'https://images.unsplash.com/photo-1608248597359-009772a0833d?auto=format&fit=crop&w=800&q=80',
+                'gambar_path' => 'products/1793248046_6ae2cb2e3fa8c.jpg',
                 'is_active' => true,
             ]
         );
@@ -131,7 +131,7 @@ class DatabaseSeeder extends Seeder
                 'jenis_batu' => 'Batu Kali Sungai Alami',
                 'deskripsi' => 'Batu pijakan taman (stepping stone) dengan permukaan potong rata 3 cm dan pinggiran bulat aman.',
                 'harga' => 35000,
-                'gambar_path' => 'https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=800&q=80',
+                'gambar_path' => 'products/1793248170_6ae2cbaa67a7d.jpg',
                 'is_active' => true,
             ]
         );
@@ -143,7 +143,7 @@ class DatabaseSeeder extends Seeder
                 'jenis_batu' => 'Batu Kali Boulder',
                 'deskripsi' => 'Wastafel estetik nuansa zen / resort dengan bagian luar kulit batu asli dan bagian dalam terpoles kilap.',
                 'harga' => 350000,
-                'gambar_path' => 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=800&q=80',
+                'gambar_path' => 'products/1793248240_6ae2cbf0ec4b1.jpg',
                 'is_active' => true,
             ]
         );
@@ -155,18 +155,10 @@ class DatabaseSeeder extends Seeder
                 'jenis_batu' => 'Batu Kali Alami',
                 'deskripsi' => 'Kap lampu taman tahan cuaca ekstrem yang memancarkan pendar cahaya hangat di malam hari.',
                 'harga' => 175000,
-                'gambar_path' => 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=800&q=80',
+                'gambar_path' => 'products/1793248370_6ae2cc721d43d.jpg',
                 'is_active' => true,
             ]
         );
-
-        // Pastikan seluruh produk yang sudah ada di database mendapatkan foto marmer otentik
-        foreach (Product::all() as $prod) {
-            if (empty($prod->gambar_path) || !str_starts_with($prod->gambar_path, 'http')) {
-                $prod->gambar_path = $prod->image_url;
-                $prod->save();
-            }
-        }
 
         // 3. Bahan Baku UD Cahaya Onix (2026)
         $cahayaMaterials = [

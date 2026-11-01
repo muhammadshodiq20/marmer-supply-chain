@@ -61,19 +61,20 @@
 <body class="bg-slate-950 text-slate-100 antialiased selection:bg-teal-500 selection:text-white">
 
     <!-- Top Navigation -->
-    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-slate-800/80 bg-slate-950/75 backdrop-blur-xl">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="{{ route('landing') }}" class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-teal-500 to-emerald-400 flex items-center justify-center shadow-lg shadow-teal-500/30 ring-2 ring-teal-400/20">
-                    <i class="fas fa-cubes-stacked text-white text-lg"></i>
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-slate-800/80 bg-slate-950/85 backdrop-blur-xl" x-data="{ mobileNav: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+            <a href="{{ route('landing') }}" class="flex items-center gap-2.5 sm:gap-3">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-teal-500 to-emerald-400 flex items-center justify-center shadow-lg shadow-teal-500/30 ring-2 ring-teal-400/20 shrink-0">
+                    <i class="fas fa-cubes-stacked text-white text-base sm:text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-teal-300 via-emerald-200 to-white bg-clip-text text-transparent">MarmerSC</span>
-                    <span class="block text-[10px] font-semibold tracking-wider uppercase text-teal-400/90">E-Supply Chain Tulungagung</span>
+                    <span class="text-lg sm:text-xl font-extrabold tracking-tight bg-gradient-to-r from-teal-300 via-emerald-200 to-white bg-clip-text text-transparent">MarmerSC</span>
+                    <span class="block text-[9px] sm:text-[10px] font-semibold tracking-wider uppercase text-teal-400/90">E-Supply Chain Tulungagung</span>
                 </div>
             </a>
 
-            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-300">
                 <a href="#fitur" class="hover:text-teal-300 transition-colors">4 Pilar Supply Chain</a>
                 <a href="#peran" class="hover:text-teal-300 transition-colors">3 Peran Sistem</a>
                 <a href="#ikm" class="hover:text-teal-300 transition-colors">Mitra IKM</a>
@@ -88,21 +89,21 @@
                 </a>
             </nav>
 
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 sm:gap-3">
                 @guest
-                    <a href="{{ route('login') }}" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white border border-slate-700 hover:border-slate-500 transition-all flex items-center gap-1.5">
+                    <a href="{{ route('login') }}" class="px-3 sm:px-4 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white border border-slate-700 hover:border-slate-500 transition-all flex items-center gap-1.5">
                         <i class="fas fa-right-to-bracket text-teal-400"></i> Masuk
                     </a>
-                    <a href="{{ route('register') }}" class="px-4 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 text-xs font-extrabold shadow-md shadow-teal-500/20 transition-all">
-                        Daftar Pelanggan
+                    <a href="{{ route('register') }}" class="hidden sm:inline-flex px-4 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 text-xs font-extrabold shadow-md shadow-teal-500/20 transition-all">
+                        Daftar
                     </a>
                 @else
-                    <div class="flex items-center gap-3">
-                        <span class="text-xs text-slate-300 hidden sm:inline">Halo, <strong>{{ Auth::user()->name }}</strong></span>
+                    <div class="flex items-center gap-2 sm:gap-3">
+                        <span class="text-xs text-slate-300 hidden md:inline">Halo, <strong>{{ Auth::user()->name }}</strong></span>
                         <a href="{{ Auth::user()->role === 'operator' ? route('operator.index') : (Auth::user()->role === 'buyer' ? route('buyer.profile') : route('dashboard')) }}"
-                           class="px-4 py-2 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-600 text-white text-xs font-bold shadow-md shadow-teal-500/25 flex items-center gap-1.5">
+                           class="px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-600 text-white text-xs font-bold shadow-md shadow-teal-500/25 flex items-center gap-1.5">
                             <i class="fas fa-gauge"></i>
-                            <span>{{ Auth::user()->role === 'buyer' ? 'Profil & Pesanan' : 'Buka Portal' }}</span>
+                            <span>{{ Auth::user()->role === 'buyer' ? 'Pesanan Saya' : 'Portal' }}</span>
                         </a>
                         <form action="{{ route('logout') }}" method="POST" class="inline">
                             @csrf
@@ -112,7 +113,53 @@
                         </form>
                     </div>
                 @endguest
+
+                <!-- Mobile Hamburger Toggle -->
+                <button @click="mobileNav = !mobileNav" class="lg:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white focus:outline-none">
+                    <i class="fas" :class="mobileNav ? 'fa-times' : 'fa-bars'"></i>
+                </button>
             </div>
+        </div>
+
+        <!-- Mobile Drawer Menu (Responsive HP, iPad, Tablet) -->
+        <div x-show="mobileNav" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-4"
+             @click.outside="mobileNav = false"
+             class="lg:hidden bg-slate-900/95 border-b border-slate-800 backdrop-blur-2xl px-6 py-5 space-y-3"
+             style="display: none;">
+            <a href="#fitur" @click="mobileNav = false" class="block py-2 text-sm text-slate-300 hover:text-teal-400 font-medium">
+                <i class="fas fa-cubes text-teal-400 mr-2 w-4"></i> 4 Pilar Supply Chain
+            </a>
+            <a href="#peran" @click="mobileNav = false" class="block py-2 text-sm text-slate-300 hover:text-teal-400 font-medium">
+                <i class="fas fa-users-gear text-teal-400 mr-2 w-4"></i> 3 Peran Sistem
+            </a>
+            <a href="#ikm" @click="mobileNav = false" class="block py-2 text-sm text-slate-300 hover:text-teal-400 font-medium">
+                <i class="fas fa-building text-teal-400 mr-2 w-4"></i> Sentra Mitra IKM
+            </a>
+            <a href="{{ route('catalog') }}" class="block py-2 text-sm text-teal-300 hover:text-teal-200 font-bold border-t border-slate-800 pt-3">
+                <i class="fas fa-store text-teal-400 mr-2 w-4"></i> Katalog Produk Digital
+            </a>
+            <a href="{{ route('tracking.index') }}" class="block py-2 text-sm text-cyan-300 hover:text-cyan-200 font-bold">
+                <i class="fas fa-search text-cyan-400 mr-2 w-4"></i> Lacak Pesanan (WIP)
+            </a>
+            <a href="https://wa.me/6281234567890?text=Halo%20Perajin%20Marmer%20Tulungagung,%20saya%20ingin%20konsultasi%20pemesanan%20marmer." target="_blank" class="block py-2 text-sm text-emerald-400 hover:text-emerald-300 font-bold">
+                <i class="fab fa-whatsapp mr-2 w-4"></i> Konsultasi WhatsApp
+            </a>
+            @guest
+                <div class="pt-3 border-t border-slate-800 grid grid-cols-2 gap-2">
+                    <a href="{{ route('login') }}" class="w-full py-2.5 rounded-xl border border-slate-700 text-center text-xs font-bold text-white hover:bg-slate-800">
+                        Masuk
+                    </a>
+                    <a href="{{ route('register') }}" class="w-full py-2.5 rounded-xl bg-teal-500 text-slate-950 text-center text-xs font-black hover:bg-teal-400">
+                        Daftar Akun
+                    </a>
+                </div>
+            @endguest
         </div>
     </header>
 

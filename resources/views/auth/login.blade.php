@@ -60,24 +60,7 @@
             </div>
         @endif
 
-        <!-- One-Click Google Login Button -->
-        <a href="{{ route('auth.google') }}" class="w-full py-3 px-4 rounded-2xl bg-white hover:bg-slate-100 text-slate-800 font-bold text-xs shadow-md transition-all flex items-center justify-center gap-3 border border-slate-200 hover:scale-[1.01] active:scale-[0.99] mb-5">
-            <svg class="w-4 h-4" viewBox="0 0 24 24">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-            </svg>
-            <span>Lanjutkan dengan Google</span>
-        </a>
-
-        <div class="relative flex items-center justify-center mb-5">
-            <div class="border-t border-slate-800 w-full"></div>
-            <span class="bg-slate-900 px-3 text-[10px] text-slate-500 uppercase font-semibold">atau dengan email</span>
-            <div class="border-t border-slate-800 w-full"></div>
-        </div>
-
-        <!-- Form Email / Username & Password -->
+        <!-- Form Login Mandiri -->
         <form action="{{ route('login.post') }}" method="POST" class="space-y-4">
             @csrf
 
@@ -85,7 +68,7 @@
                 <label class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1.5">Email / Username Akun</label>
                 <div class="relative">
                     <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
-                    <input type="text" name="email" value="{{ old('email') }}" placeholder="admin / operator / buyer / email..." required autocapitalize="none" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <input type="text" name="email" value="{{ old('email') }}" placeholder="admin / operator / buyer / email..." required autocapitalize="none" class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all">
                 </div>
             </div>
 
@@ -93,72 +76,22 @@
                 <label class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1.5">Kata Sandi</label>
                 <div class="relative">
                     <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
-                    <input type="password" name="password" placeholder="admin / operator / buyer" required class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <input type="password" name="password" placeholder="Masukkan kata sandi..." required class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all">
                 </div>
             </div>
 
-            <div class="flex items-center justify-between text-xs">
-                <label class="flex items-center gap-2 cursor-pointer text-slate-400">
+            <div class="flex items-center justify-between text-xs pt-1">
+                <label class="flex items-center gap-2 cursor-pointer text-slate-400 hover:text-slate-300">
                     <input type="checkbox" name="remember" class="rounded bg-slate-950 border-slate-700 text-teal-500 focus:ring-0">
                     <span>Ingat Saya</span>
                 </label>
                 <a href="#" class="text-teal-400 hover:underline">Lupa Sandi?</a>
             </div>
 
-            <button type="submit" class="w-full py-3 rounded-2xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-black text-xs shadow-lg shadow-teal-500/25 transition-all">
+            <button type="submit" class="w-full py-3.5 rounded-2xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-black text-xs shadow-lg shadow-teal-500/25 transition-all">
                 Masuk ke Akun
             </button>
         </form>
-
-        <!-- Kredensial Akun Pengguna Resmi -->
-        <div class="mt-6 pt-5 border-t border-slate-800">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-2.5 text-center">
-                <i class="fas fa-shield-halved text-teal-400 mr-1"></i> Akun Resmi Tersedia:
-            </span>
-            <div class="space-y-2 text-[11px]">
-                <!-- Akun Admin -->
-                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
-                    <div>
-                        <span class="font-bold text-teal-400 flex items-center gap-1.5">
-                            <i class="fas fa-crown text-[10px]"></i> Admin (Owner):
-                        </span>
-                        <span class="text-slate-300 font-mono text-[10px]">admin@marmer.com <span class="text-slate-500 font-sans">(atau: <strong class="text-teal-300">admin</strong>)</span></span>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-[9px] text-slate-500 block uppercase font-bold">Password:</span>
-                        <span class="font-mono text-emerald-400 font-bold text-xs bg-slate-900 px-2 py-0.5 rounded border border-slate-700">admin</span>
-                    </div>
-                </div>
-
-                <!-- Akun Operator -->
-                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
-                    <div>
-                        <span class="font-bold text-amber-400 flex items-center gap-1.5">
-                            <i class="fas fa-hammer text-[10px]"></i> Operator Bengkel:
-                        </span>
-                        <span class="text-slate-300 font-mono text-[10px]">operator@marmer.com <span class="text-slate-500 font-sans">(atau: <strong class="text-amber-300">operator</strong>)</span></span>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-[9px] text-slate-500 block uppercase font-bold">Password:</span>
-                        <span class="font-mono text-emerald-400 font-bold text-xs bg-slate-900 px-2 py-0.5 rounded border border-slate-700">operator</span>
-                    </div>
-                </div>
-
-                <!-- Akun Buyer -->
-                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
-                    <div>
-                        <span class="font-bold text-cyan-400 flex items-center gap-1.5">
-                            <i class="fas fa-bag-shopping text-[10px]"></i> Buyer / Pelanggan:
-                        </span>
-                        <span class="text-slate-300 font-mono text-[10px]">buyer@marmer.com <span class="text-slate-500 font-sans">(atau: <strong class="text-cyan-300">buyer</strong>)</span></span>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-[9px] text-slate-500 block uppercase font-bold">Password:</span>
-                        <span class="font-mono text-emerald-400 font-bold text-xs bg-slate-900 px-2 py-0.5 rounded border border-slate-700">buyer</span>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Footer Link -->
         <p class="text-center text-xs text-slate-400 mt-6">
